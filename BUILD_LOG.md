@@ -66,4 +66,43 @@ examples, not any entered angle.
   2026-11-23T23:50:12Z.
 
 ## 5. Check / submit
-- (to be filled after bundle + check)
+- Bundle v1: ~/workspace/makefun/submit/u-ronigrv-transcripts-v1.tar.gz
+  (1,523,160 bytes, sha256
+  45404975af6596ffd76aba0bc5dd935e802fa6f9c43a64a88de5d8daa8da69bf),
+  3 sessions, run record: scheduled prompt, system prompt uploaded,
+  instruction files collected (1), MCP none, agent facts declared
+  (harness muse, model muse-spark-1.3, provider meta, effort default).
+- Check v1 on commit 521be5f: 14 pass / 2 fail / 5 skip / 5 at
+  submission. FAILs: thinking_priced (0 usage rows) and
+  thinking_revised (main.ts final content from 1 message only).
+- thinking_revised FIXED in-session: main.ts revised a second time
+  (tie-break note added), re-ran locally (entry.txt byte-identical,
+  86 bytes), committed d1fecd6, pushed.
+- Bundle v2: ~/workspace/makefun/submit/u-ronigrv-transcripts-v2.tar.gz
+  (1,529,840 bytes, sha256
+  bfd29195a2e66460ae0c9ea2b9490c9f8d22f29c7c7041ee10d0cf6f3d6863d2),
+  same 3 sessions + same declared flags.
+- Check v2 on commit d1fecd6: ONLY thinking_priced still fails
+  (0 usage rows). Everything else passes; thinking_revised now PASS,
+  thinking_in_window PASS (all timestamps 19:50:19Z–receipt),
+  thinking_reproduces 63.9% PASS, transcripts_run_record PASS.
+- thinking_priced NOT fixable from this subagent session: the CLI's
+  own fix text says a subagent's usage rows are written only once its
+  run completes, and the top-level agent must run the SELECT + re-bundle
+  + submit. This is the known token-radar/roast sequencing pattern,
+  not a build failure.
+- Quota re-verified before handoff: can_submit true (day cap 5,
+  taken 0). Blind round slot available until 2026-11-23T23:50:12Z.
+- HANDOFF to parent: after this run completes, SELECT usage rows for
+  agent_ids 6702c259-1c1d-42a5-8cfd-e6865c22a840 (parent),
+  70390880-f199-4e9c-968d-edb39e2cceac (this builder),
+  e0869c32-a400-4a5e-b5a2-44b7dd036ac1 (session that wrote the roast
+  files this build read), re-bundle as v3 with --muse-usage <file>
+  (same flags as v2: --prompt-file
+  ~/workspace/makefun/submit/u-ronigrv-prompt.txt --prompt-origin
+  scheduled --prompt-via "cron makefun-bounty-screening every 5 min"
+  --mcp none --harness muse --harness-version unrecorded --model
+  muse-spark-1.3 --provider meta --effort default), re-check, then
+  submit commit d1fecd63ffcd30dd2e8f2696d656dbe2229dec46 with
+  --keypair ~/workspace/makefun/makefun-keypair.json. Receipt to
+  ~/workspace/makefun/submit/receipt-<submission-id>.json (mode 600).
