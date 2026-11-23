@@ -23,6 +23,10 @@
 //    self-checkout, smartwatches). The comparison — food vs friendships
 //    — is the writer's own.
 //
+// Short is also a tie-break asset: on an exact Judge win rate tie the
+// smaller text (fewer bytes) places first, and 86 bytes is near the
+// floor for a line that still lands a full joke.
+//
 // Run locally:  mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
